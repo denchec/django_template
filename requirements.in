@@ -1,4 +1,5 @@
 Django==5
 djangorestframework
 django-environ
+django-behaviors
 psycopg2-binary
