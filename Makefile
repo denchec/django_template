@@ -8,3 +8,6 @@ lint:
 
 fix:
 	ruff src --fix
+
+test:
+	pytest
