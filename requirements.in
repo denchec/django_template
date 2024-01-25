@@ -3,3 +3,5 @@ djangorestframework
 django-environ
 django-behaviors
 psycopg2-binary
+uritemplate
+pyyaml

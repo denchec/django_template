@@ -2,11 +2,10 @@ from pathlib import Path
 
 import environ
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
-    DEBUG=(bool, False),
+    DEBUG=(bool, True),
 )
 
 environ.Env.read_env(BASE_DIR / ".env.dist")
@@ -19,14 +18,18 @@ environ.Env.read_env(BASE_DIR / ".env")
 SECRET_KEY = "django-insecure-3x-ab4%uwykswbk9g75q@@iyob(2bg*dpwl!n8p*g&f+p33p-r"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = []
 
 
 # Application definition
 
-INSTALLED_APPS = [
+INTERNAL_APPS = [
+    "books",
+]
+
+THIRD_PARTY_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -35,8 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "behaviors.apps.BehaviorsConfig",
     "rest_framework",
-    "books",
 ]
+
+INSTALLED_APPS = INTERNAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -109,6 +113,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
+
+STATIC_ROOT = BASE_DIR / "static"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
