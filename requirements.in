@@ -5,3 +5,4 @@ django-behaviors
 psycopg2-binary
 uritemplate
 pyyaml
+whitenoise

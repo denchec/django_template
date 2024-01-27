@@ -5,7 +5,7 @@ import environ
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
-    DEBUG=(bool, True),
+    DEBUG=(bool, False),
 )
 
 environ.Env.read_env(BASE_DIR / ".env.dist")
@@ -20,7 +20,7 @@ SECRET_KEY = "django-insecure-3x-ab4%uwykswbk9g75q@@iyob(2bg*dpwl!n8p*g&f+p33p-r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,12 +38,17 @@ THIRD_PARTY_APPS = [
     "django.contrib.staticfiles",
     "behaviors.apps.BehaviorsConfig",
     "rest_framework",
+    "whitenoise",
 ]
 
 INSTALLED_APPS = INTERNAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    # The WhiteNoise middleware should be placed directly
+    #   after the Django SecurityMiddleware (if you are using it)
+    #   and before all other middleware
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",

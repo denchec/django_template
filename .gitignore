@@ -180,3 +180,5 @@ pyrightconfig.json
 .piterpy/
 
 .python-version
+
+src/static/

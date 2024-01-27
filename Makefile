@@ -11,3 +11,6 @@ fix:
 
 test:
 	pytest
+
+# image:
+# 	docker build -t test .
