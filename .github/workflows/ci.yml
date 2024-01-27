@@ -10,13 +10,37 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16.1
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      id: setup-python
       with:
-        python-version: "3.12"
-        cache: "pip"
+        python-version-file: '.python-version'
+
     - run: pip install -U pip-tools
     - run: pip-sync dev-requirements.txt requirements.txt
-    - run: make lint
-    - run: make test
+
+    - name: Lint
+      id: lint
+      run: make lint
+
+    - name: Run tests
+      id: test
+      env:
+        DATABASE_URL: postgres://postgres:@localhost:5432/postgres
+      run: make test

@@ -179,6 +179,4 @@ pyrightconfig.json
 .vscode/
 .piterpy/
 
-.python-version
-
 src/static/
