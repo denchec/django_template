@@ -178,5 +178,5 @@ pyrightconfig.json
 
 .vscode/
 .piterpy/
-
+junit
 src/static/

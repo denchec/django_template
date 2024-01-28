@@ -4,13 +4,17 @@ deps:
 	pip-sync requirements.txt dev-requirements.txt
 
 lint:
-	ruff src
+	ruff src $(ARGS)
 
 fix:
 	ruff src --fix
 
 test:
-	pytest
+	pytest src $(ARGS)
+
+start:
+	docker-compose up -d
+	cd src && ./manage.py runserver
 
 # image:
 # 	docker build -t test .
