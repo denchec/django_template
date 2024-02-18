@@ -1,7 +1,9 @@
-Django==5
+Django<=6
 djangorestframework
 django-environ
 django-behaviors
+django-cors-headers
+
 psycopg2-binary
 uritemplate
 pyyaml

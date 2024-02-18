@@ -17,10 +17,12 @@ environ.Env.read_env(BASE_DIR / ".env")
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-3x-ab4%uwykswbk9g75q@@iyob(2bg*dpwl!n8p*g&f+p33p-r"
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = ["*"]
+
+if DEBUG or env("CORS_ALLOW_ALL_ORIGINS"):
+    CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
@@ -39,11 +41,13 @@ THIRD_PARTY_APPS = [
     "behaviors.apps.BehaviorsConfig",
     "rest_framework",
     "whitenoise",
+    "corsheaders",
 ]
 
 INSTALLED_APPS = INTERNAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     # The WhiteNoise middleware should be placed directly
     #   after the Django SecurityMiddleware (if you are using it)
