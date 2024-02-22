@@ -3,6 +3,7 @@ djangorestframework
 django-environ
 django-behaviors
 django-cors-headers
+django-oauth-toolkit
 
 psycopg2-binary
 uritemplate
