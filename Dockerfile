@@ -11,7 +11,6 @@ ADD requirements.txt /srv
 RUN pip install --no-cache-dir -r /srv/requirements.txt
 
 ADD src /srv
-RUN rm -f /srv/.env
 WORKDIR /srv
 
 
