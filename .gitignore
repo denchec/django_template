@@ -180,3 +180,4 @@ pyrightconfig.json
 .piterpy/
 junit
 src/static/
+!src/static/readme.txt

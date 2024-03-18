@@ -8,8 +8,8 @@ env = environ.Env(
     DEBUG=(bool, False),
 )
 
-environ.Env.read_env(BASE_DIR / ".env.dist")
 environ.Env.read_env(BASE_DIR / ".env")
+environ.Env.read_env(BASE_DIR / ".env.dist")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -21,7 +21,7 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 
-if DEBUG or env("CORS_ALLOW_ALL_ORIGINS"):
+if DEBUG or env("CORS_ALLOW_ALL_ORIGINS", default=False):
     CORS_ALLOW_ALL_ORIGINS = True
 
 
